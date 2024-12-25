@@ -8,7 +8,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "niveles")
+@Table(name = "Niveles")
 public class NivelModel {
 
 	@Id
