@@ -17,8 +17,8 @@ public class BenchfitnessApplication {
 
 	@Configuration
 	public static class Myconfiguration{
-		@Bean
-		public WebMvcConfigurer corsConfigurer() {
+        @Bean
+        WebMvcConfigurer corsConfigurer() {
 			return new WebMvcConfigurer() {
 				@Override
 				public void addCorsMappings(CorsRegistry registry) {
