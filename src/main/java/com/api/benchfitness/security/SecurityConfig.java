@@ -20,7 +20,7 @@ public class SecurityConfig {
 
 		 http.csrf(csrf -> csrf.disable()) // Desactiva CSRF si no es necesario
 	        .authorizeHttpRequests(auth -> auth
-	            .anyRequest().permitAll()) // Permite todas las solicitudes para depurar
+	            .anyRequest().authenticated()) // Permite todas las solicitudes para depurar
 	        .addFilterBefore(apiKeyFilter, UsernamePasswordAuthenticationFilter.class); // Añadimos el filtro de API Key
 
 		return http.build();
