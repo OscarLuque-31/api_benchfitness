@@ -39,13 +39,11 @@ public class EjercicioController {
 		}
 	}
 	
-	@GetMapping()
+	@GetMapping(path = "/search")
 	public List<EjercicioModel> filtroNombreEjercicios(@RequestParam(required = true) String nombre){		
-		if (nombre == null) {
-			return ejercicioService.getEjercicios();
-		} else {			
+					
 			return ejercicioService.getEjerciciosFiltrados(nombre);
-		}
+		
 	}
 
 	
