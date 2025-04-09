@@ -38,6 +38,15 @@ public class EjercicioController {
 			return ejercicioService.getEjerciciosFiltrados(musculo,categoria,nivel);
 		}
 	}
+	
+	@GetMapping()
+	public List<EjercicioModel> filtroNombreEjercicios(@RequestParam(required = true) String nombre){		
+		if (nombre == null) {
+			return ejercicioService.getEjercicios();
+		} else {			
+			return ejercicioService.getEjerciciosFiltrados(nombre);
+		}
+	}
 
 	
 }

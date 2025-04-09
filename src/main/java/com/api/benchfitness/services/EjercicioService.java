@@ -75,6 +75,28 @@ public class EjercicioService {
 	}
 
 
+	/**
+	 * Método que retorna los ejercicios que coincida con el nombre
+	 * @param nombre
+	 * @return lista de los ejercicios encontrados con el nombre
+	 */
+	public List<EjercicioModel> getEjerciciosFiltrados(String nombre) {
+
+		List<EjercicioModel> ejercicios = ejercicioRepository.findAll();
+		List<EjercicioModel> ejerciciosFiltrados = new ArrayList<>();	
+
+		for (EjercicioModel ejercicio : ejercicios) {
+
+			if (nombre != null && ejercicio.getNombre().startsWith(nombre)) {				
+				ejerciciosFiltrados.add(ejercicio);
+			}
+
+		}
+		
+		return ejerciciosFiltrados;
+	}
+
+
 
 
 }
