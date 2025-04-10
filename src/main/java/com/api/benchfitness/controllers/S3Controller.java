@@ -1,6 +1,8 @@
 package com.api.benchfitness.controllers;
 
 import com.api.benchfitness.services.S3Service;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/gifs")
 public class S3Controller {
 
+	@Autowired
     private final S3Service s3Service;
 
     public S3Controller(S3Service s3Service) {

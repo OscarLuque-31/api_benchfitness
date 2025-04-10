@@ -9,11 +9,13 @@ import software.amazon.awssdk.services.s3.presigner.model.GetObjectPresignReques
 import software.amazon.awssdk.services.s3.presigner.model.PresignedGetObjectRequest;
 import java.time.Duration;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
 
 /**
  * Servicio para generar URLs pre-firmadas de objetos en Amazon S3.
  * Permite acceso temporal a archivos privados en el bucket sin necesidad de credenciales AWS.
  */
+@Service
 public class S3Service {
 
     // Configuración inyectada desde application.properties
