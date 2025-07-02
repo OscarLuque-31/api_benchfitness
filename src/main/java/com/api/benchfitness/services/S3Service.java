@@ -9,6 +9,7 @@ import software.amazon.awssdk.services.s3.presigner.model.GetObjectPresignReques
 import software.amazon.awssdk.services.s3.presigner.model.PresignedGetObjectRequest;
 import java.time.Duration;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Service;
 
 /**
@@ -16,6 +17,7 @@ import org.springframework.stereotype.Service;
  * Permite acceso temporal a archivos privados en el bucket sin necesidad de credenciales AWS.
  */
 @Service
+@ConditionalOnProperty(name = {"aws.access.key.id", "aws.access.secret.key.id", "aws.region", "aws.bucket.name"})
 public class S3Service {
 
     // Configuración inyectada desde application.properties

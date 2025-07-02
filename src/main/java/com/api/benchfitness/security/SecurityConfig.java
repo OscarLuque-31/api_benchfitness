@@ -1,11 +1,14 @@
 package com.api.benchfitness.security;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+
+import com.api.benchfitness.services.UserService;
 
 /**
  * Configuración principal de seguridad para la aplicación.
@@ -14,12 +17,16 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @Configuration // Indica que esta clase contiene configuraciones de Spring
 public class SecurityConfig {
 
-    /**
-     * API Key válida cargada desde las propiedades de la aplicación.
-     */
-    @Value("${security.api.key}")
-    private String apiKey;
+   
+  
+    @Autowired
+    private final UserService userService; // Inyecta el UserService
 
+
+    public SecurityConfig(UserService userService) {
+        this.userService = userService;
+    }
+    
     /**
      * Configura la cadena principal de filtros de seguridad.
      * @param http Objeto de configuración de seguridad HTTP
@@ -29,7 +36,7 @@ public class SecurityConfig {
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         // 1. Creamos el filtro personalizado de API Key
-        ApiKeyAuthFilter apiKeyFilter = new ApiKeyAuthFilter(apiKey);
+        ApiKeyAuthFilter apiKeyFilter = new ApiKeyAuthFilter(userService);
 
         // 2. Configuramos las reglas de seguridad
         http
@@ -38,6 +45,8 @@ public class SecurityConfig {
             
             // 2.2. Configuramos las autorizaciones de peticiones HTTP
             .authorizeHttpRequests(auth -> auth
+                 // Permitimos que la ruta de registro sea accesible sin autenticación
+            	.requestMatchers("/public/register").permitAll()
                 // Todas las peticiones requieren autenticación
                 .anyRequest().authenticated()
             )
